@@ -1,0 +1,80 @@
+"""Простое число
+Напишите функцию, которая проверяет,
+является ли число n простым (делится только на 1 и само себя) и возвращает булевый результат.
+Данные:
+n = 17
+Пример вывода:
+Число 17 является простым"""
+
+
+def numer(num):
+    if num <= 1:
+        return False
+    for i in range(2, int(num**0.2)+ 1):
+        if i % num == 0:
+            return False
+    return True
+
+
+num = int(input())
+if numer(num):
+    print(f"Число {num}, является простым")
+else:
+    print(f"Число {num}, не является простым")
+
+
+"""Фильтрация чисел по чётности
+Напишите функцию, которая принимает filter_type ("even" или "odd") и произвольное количество чисел, 
+возвращая только те, которые соответствуют фильтру.
+Пример вызова:
+print(filter_numbers("even", 1, 2, 3, 4, 5, 6))
+print(filter_numbers("odd", 10, 15, 20, 25))
+print(filter_numbers("prime", 2, 3, 5, 7))
+Пример вывода:
+[2, 4, 6]
+[15, 25]
+Некорректный фильтр"""
+
+
+def filter_numbers(filter_n, *numbers):
+    result = []
+    if filter_n == "even":
+        result = [n for n in numbers if n % 2 == 0]
+    elif filter_n == "odd":
+        result = [n for n in numbers if n % 2 != 0]
+    else:
+        return "Некорректный фильтр"
+    return result
+
+print(filter_numbers("even", 1, 2, 3, 4, 5, 6))
+print(filter_numbers("odd", 10, 15, 20, 25))
+print(filter_numbers("prime", 2, 3, 5, 7))
+
+
+
+"""
+Объединение словарей
+Напишите функцию, 
+которая принимает любое количество словарей и объединяет их в один. 
+Если ключи повторяются, используется значение из последнего словаря.
+Данные:
+dict1 = {"a": 1, "b": 2}
+dict2 = {"b": 3, "c": 4}
+dict3 = {"d": 5}
+Пример вызова:
+print(merge_dicts(dict1, dict2, dict3))
+Пример вывода:
+
+{'a': 1, 'b': 3, 'c': 4, 'd': 5}
+"""
+
+def worlds(*dict):
+    resolt = {}
+    for i in dict:
+        resolt.update(i)
+    return resolt
+
+dict1 = {"a": 1, "b": 2}
+dict2 = {"b": 3, "c": 4}
+dict3 = {"d": 5}
+print(worlds(dict1, dict2, dict3))

@@ -1,0 +1,51 @@
+"""
+1
+Повторения букв
+Реализуйте функцию, которая принимает текст и возвращает словарь с подсчётом количества каждой буквы,
+игнорируя регистр.
+Данные:
+text = "Programming is fun!"
+Пример вывода:
+{'p': 1, 'r': 2, 'o': 1, 'g': 2, 'a': 1, 'm': 2, 'i': 2, 'n': 2, 's': 1, 'f': 1, 'u': 1}
+"""
+
+def words(text):
+    result = {}
+    for i in text.lower():
+        if i.isalpha():
+            if i in result:
+                result[i] += 1
+            else:
+                result[i] = 1
+    return result
+
+
+text = "Programming is fun!"
+print(words(text))
+
+
+"""
+2
+Группировка студентов по классам
+Создайте структуру для группировки студентов по классам.
+Добавьте студентов в соответствующие группы.
+Данные:
+students = [("class1", "Alice"), ("class2", "Bob"), ("class1", "Charlie"), ("class3", "Daisy")]
+Пример вывода:
+{'class1': ['Alice', 'Charlie'], 'class2': ['Bob'], 'class3': ['Daisy']}
+"""
+
+def clas(students):
+    neue_clas = {}
+    for key, name in students:
+        if key not in neue_clas:
+            neue_clas[key] = []
+        neue_clas[key].append(name)
+    return neue_clas
+
+
+students = [("class1", "Alice"),
+            ("class2", "Bob"),
+            ("class1", "Charlie"),
+            ("class3", "Daisy")]
+print(clas(students))

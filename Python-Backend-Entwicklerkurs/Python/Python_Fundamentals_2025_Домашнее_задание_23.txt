@@ -1,0 +1,67 @@
+"""
+1
+Объединение данных в строку
+Напишите функцию, которая принимает список любых данных (строки, числа, списки, словари)
+и возвращает их строковое представление, объединённое через " | ".
+Добавьте документацию и аннотации типов для всех параметров и возвращаемого значения.
+Данные:
+data = [42, "hello", [1, 2, 3], {"a": 1, "b": 2}]
+Пример вывода:
+42 | hello | [1, 2, 3] | {'a': 1, 'b': 2}
+"""
+from typing import List, Dict, Any
+
+def oll_typ(data: list(Any)) -> list:
+    """
+    parameter :
+            the function accepts a list of any data (strings, numbers, lists, dictionaries)
+    :return:
+            Returns a string representation concatenated with " | "
+    """
+    return " | ".join(str(i) for i in data)
+
+
+data = [42, "hello", [1, 2, 3], {"a": 1, "b": 2}]
+print(oll_typ(data))
+
+"""
+2
+Сумма вложенных чисел
+Напишите функцию, которая принимает список словарей, где каждый словарь содержит имя пользователя и список баллов. 
+Функция должна вернуть сумму всех чисел. Добавьте документацию и аннотации типов для всех параметров и возвращаемого значения.
+Данные:
+data = [
+
+    {"name": "Alice", "scores": [10, 20, 30]},
+
+    {"name": "Bob", "scores": [5, 15, 25]},
+
+    {"name": "Charlie", "scores": [7, 17, 27]}
+
+]
+Пример вывода:
+Итоговый балл: 156
+"""
+
+def F_value(data: list[dict[Any]]) -> int:
+    """
+    Calculates the sum of all numbers in the points list for each user.
+
+    :param data: A list of dictionaries, each containing a
+                 username (key "name") and a list of numbers (key "scores").
+    :return: The sum of all numbers from all "scores" lists.
+    """
+    result = 0
+    for i in data:
+        if isinstance(i, dict) and "scores" in i:
+            for x in i["scores"]:
+                if isinstance(x, int):
+                    result += x
+    return result
+
+data = [
+    {"name": "Alice", "scores": [10, 20, 30]},
+    {"name": "Bob", "scores": [5, 15, 25]},
+    {"name": "Charlie", "scores": [7, 17, 27]}
+]
+print(F_value(data))
