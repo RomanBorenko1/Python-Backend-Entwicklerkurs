@@ -1,0 +1,41 @@
+"""
+1
+Сумма цифр числа
+Напишите рекурсивную функцию, которая находит сумму всех цифр числа.
+Данные:
+num = 43197
+Пример вывода:
+24
+"""
+
+def number_f(n):
+    if n == 0:
+        return 0
+    return n % 10 + number_f(n // 10)
+
+
+number = 43197
+print(number_f(number))
+
+"""
+2
+Сумма вложенных чисел
+Напишите рекурсивную функцию, которая суммирует все числа во вложенных списках.
+Данные:
+nested_numbers = [1, [2, 3], [4, [5, 6]], 7]
+Пример вывода:
+28
+"""
+
+
+def recurs(namber):
+    count = 0
+    for i in namber:
+        if isinstance(i, list):
+            count += recurs(i)
+        else:
+            count += i
+    return count
+    
+nested_numbers = [1, [2, 3], [4, [5, 6]], 7]
+print(recurs(nested_numbers))
