@@ -1,0 +1,60 @@
+"""
+1
+Напишите функцию, которая выполняет деление двух чисел, введенных пользователем, и обрабатывает возможные ошибки.
+Пример вывода:
+Введите делимое: 345
+Введите делитель: 5a
+Ошибка: Введено некорректное число.
+"""
+
+
+def f_func():
+    try:
+        a = int(input())
+        b = int(input())
+        result = a / b
+        print("Деление выполнено успешно!")
+        return result
+    except ValueError:
+        print("Ошибка: Введено некорректное число.")
+    except ZeroDivisionError:
+        print("Ошибка: деление на ноль!")
+
+
+print(f_func())
+
+"""
+2
+Логирование ошибок
+Перенаправьте в предыдущей задаче вывод ошибок в файл errors.log в соответствии с форматом ниже.
+Пример вывода:
+2025-02-23 22:38:53,686 - ERROR - test.py - 16 - Ошибка: Введено некорректное число.
+"""
+import logging
+from datetime import datetime
+
+logging.basicConfig(
+    filename='errors.log',
+    level=logging.ERROR,
+    format='%(asctime)s - %(levelname)s - %(filename)s - %(lineno)d - %(message)s'
+)
+
+
+def f_func():
+    try:
+        a = int(input())
+        b = int(input())
+        result = a / b
+        print("Деление выполнено успешно!")
+        return result
+    except ValueError:
+        i = "Ошибка: Введено некорректное число."
+        print(i)
+        logging.error(i)
+    except ZeroDivisionError:
+        i = "Ошибка: деление на ноль!"
+        print(i)
+        logging.error(i)
+
+
+print(f_func())
