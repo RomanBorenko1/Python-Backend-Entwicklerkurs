@@ -1,0 +1,85 @@
+"""
+1
+Список файлов и папок
+Напишите программу, которая принимает путь к директории через аргумент командной строки и выводит:
+Отдельно список папок
+Отдельно список файлов
+Пример запуска
+python script.py /home/user/documents
+Пример вывода
+Содержимое директории '/home/user/documents':
+"""
+
+import os
+import sys
+
+def f_path_folder(path_1: str):
+    if not os.path.exists(path_1):
+        print(f"Путь {path_1} не существует.")
+        return
+    print(f"Содержимое директории '{path_1}':\n")
+    folders = []
+    feils = []
+    for i in os.listdir(path_1):
+        f_path = os.path.join(path_1, i)
+        if os.path.isdir(f_path):
+            folders.append(i)
+        elif os.path.isfile(f_path):
+            feils.append(i)
+    print("Папки")
+    for folder in folders:
+        print(folder)
+    print("Файлы")
+    for file in feils:
+        print(file)
+
+if len(sys.argv) < 2:
+    print("Ошибка: Укажите путь к директории как аргумент.")
+    print("Пример: python script.py /home/user/documents")
+else:
+    directory_path = sys.argv[1]
+    f_path_folder(directory_path)
+
+
+
+"""
+2
+Поиск и удаление файлов с указанным расширением
+Напишите программу, которая:
+Принимает путь к директории и расширение файлов через аргумент командной строки.
+Рекурсивно ищет файлы с этим расширением во всех вложенных папках.
+Спрашивает у пользователя, хочет ли он удалить найденные файлы.
+Если пользователь подтверждает, удаляет их.
+"""
+
+if len(sys.argv) < 3:
+    sys.exit(1)
+folder_path = sys.argv[1]
+file_extension = sys.argv[2]
+print(f"Путь к дириктории: {folder_path}")
+print(f" Расширение файлов: {file_extension}")
+
+f_files = []
+
+for root, folder, files in os.walk(folder_path):
+    for file in files:
+        if file.lower().endswith(f".{file_extension.lower()}"):
+            f_path = os.path.join(root, file)
+            f_files.append(f_path)
+if f_files:
+    print("Найденные  файлы")
+    for f in f_files:
+        print(f)
+
+    inp = input("хотите удалить файл y/n")
+    if inp == "y":
+        for i in f_files:
+            try:
+                os.remove(i)
+                print(f"Файл удалён: {i}")
+            except Exception as e:
+                print(f"Ошибка при удалении {i}: {e}")
+    else:
+        print("Удаление отменено пользователем.")
+else:
+    print("файлы с таким расширением не найдены")
