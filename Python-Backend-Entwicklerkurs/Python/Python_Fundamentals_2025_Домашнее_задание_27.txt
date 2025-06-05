@@ -1,0 +1,81 @@
+"""
+1
+Фильтрация по ключевому слову
+Напишите программу, которая ищет в файле все строки, содержащие указанное пользователем слово,
+и сохраняет их в новый файл.
+Имя нового файла формируется как <keyword>_<original_filename>.
+Если файл не существует, программа должна вывести ошибку.
+Если совпадения не найдены, новый файл не создаётся.
+Используйте файл system_log.txt.
+Пример ввода:
+Введите имя файла для поиска: system_log.txt
+Введите ключевое слово: error
+Пример вывода:
+"""
+1
+Фильтрация по ключевому слову
+Напишите программу, которая ищет в файле все строки, содержащие указанное пользователем слово,
+и сохраняет их в новый файл.
+Имя нового файла формируется как <keyword>_<original_filename>.
+Если файл не существует, программа должна вывести ошибку.
+Если совпадения не найдены, новый файл не создаётся.
+Используйте файл system_log.txt.
+Пример ввода:
+Введите имя файла для поиска: system_log.txt
+Введите ключевое слово: error
+Пример вывода:
+Строки, содержащие 'error', сохранены в error_system_log.txt.
+"""
+
+import os
+
+filename = input("Введите имя файла для поиска: ").strip()
+if not os.path.isfile(filename):
+    print("Файл не найден")
+    exit()
+world_name = input("Введите ключевое слово: ")
+result = []
+with open(filename, "r", encoding="utf-8") as system_l:
+    for i in system_l:
+        if world_name.lower() in i.lower():
+            result.append(i)
+
+if result:
+    new_filename = f"{world_name}_{os.path.basename(filename)}"
+    with open(new_filename, "w", encoding="utf-8") as new_file:
+        new_file.writelines(result)
+    print(f"Строки'{world_name}', сохранены в '{new_filename}'.")
+else:
+    print(f"Строки'{world_name}' не найдены. Файл не создан.")
+
+"""
+Поиск и удаление дубликатов
+Напишите программу, которая удаляет дублирующиеся строки из файла и сохраняет результат в новый файл.
+Имя нового файла формируется как unique_<original_filename>.
+Если файл не существует, программа должна вывести ошибку.
+Исходный порядок строк должен сохраниться.
+Если в файле нет дубликатов, создаётся точная копия файла.
+Используйте файл movies_to_watch.txt.
+Пример ввода:
+Введите имя файла: movies_to_watch.txt
+Пример вывода:
+Дубликаты удалены. Уникальные строки сохранены в unique_movies_to_watch.txt.
+"""
+
+import os
+
+filename = input("Введите имя файла")
+
+if not os.path.isfile(filename):
+    print("файл не найден")
+else:
+    leins = []
+    a = set()
+    with open(filename, "r", encoding="utf-8") as system_l:
+        for i in system_l:
+            if i not in a:
+                a.add(i)
+                leins.append(i)
+    new_file = f"unique_{os.path.basename(filename)}"
+    with open(new_file, "w", encoding="utf-8") as n_f:
+        n_f.writelines(leins)
