@@ -1,0 +1,106 @@
+"""
+1
+План по дням недели
+Напишите программу, которая помогает планировать дела.
+Программа должна бесконечно выводить план на следующий день недели, пока пользователь нажимает 'Enter'.
+"""
+
+
+weekly_schedule = {
+
+    "Monday": ["Gym", "Work", "Read book"],
+
+    "Tuesday": ["Meeting", "Work", "Study Python"],
+
+    "Wednesday": ["Shopping", "Work", "Watch movie"],
+
+    "Thursday": ["Work", "Call parents", "Play guitar"],
+
+    "Friday": ["Work", "Dinner with friends"],
+
+    "Saturday": ["Hiking", "Rest"],
+
+    "Sunday": ["Family time", "Rest"]
+
+}
+
+days = list(weekly_schedule.items())
+
+import itertools
+day_iterator = itertools.cycle(days)
+while True:
+    a = input("Нажмите Enter, чтобы узнать план на следующий день (или введите 'выход'): ")
+    if a != "":
+        break
+
+    day, tasks = next(day_iterator)
+    print(f"\n{day}: {', '.join(tasks)}\n")
+
+#2 Задание
+fruits = ["Apple", "Banana", "Orange"]
+
+vegetables = ["Carrot", "Tomato", "Cucumber"]
+
+dairy = ["Milk", "Cheese", "Yogurt"]
+
+
+products = fruits + vegetables + dairy
+a = iter(products)
+for i in range(0, len(products)):
+    print(next(a).lower())
+
+
+
+"""
+2
+Объединение списков продуктов
+Напишите функцию, которая принимает несколько списков с названиями продуктов и возвращает генератор,
+содержащий все продукты в нижнем регистре.
+Выведите содержимое генератора.
+"""
+
+
+from itertools import product
+
+clothes = ["T-shirt", "Jeans", "Jacket"]
+colors = ["Red", "Blue", "Black"]
+sizes = ["S", "M", "L"]
+
+combinations = product(clothes, colors, sizes) #Функция product вычисляет декартово произведение
+
+while True:
+    try:
+        clothe, color, size = next(combinations)
+        print(f"{clothe} - {color} - {size}")
+    except StopIteration:
+        break
+
+
+
+
+
+
+"""
+3
+Комбинации одежды
+Напишите функцию, которая принимает списки типов одежды, цветов и размеров, а затем генерирует все возможные комбинации
+в формате "Clothe - Color - Size".
+"""
+
+
+
+def gen_combinations(clothes, colors, sizes):
+    combinations = []
+    for clothe in clothes:
+        for color in colors:
+            for size in sizes:
+                combinations.append(f"{clothe} - {color} - {size}")
+    return combinations
+
+
+clothes = ["T-shirt", "Jeans", "Jacket"]
+colors = ["Red", "Blue", "Black"]
+sizes = ["S", "M", "L"]
+
+for combo in gen_combinations(clothes, colors, sizes):
+    print(combo)
