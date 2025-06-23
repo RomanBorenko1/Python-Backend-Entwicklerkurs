@@ -1,0 +1,42 @@
+"""
+1
+Анализ курсов студентов
+Реализовать программу, которая должна:
+Прочитать файл student_courses.json, содержащий:
+имя,
+дату рождения (birth_date) в формате дд.мм.гггг,
+дату поступления (enrollment_date) в том же формате,
+список курсов.
+Вычислить:
+Общее количество студентов.
+Средний возраст на момент поступления.
+Количество студентов на каждом курсе.
+Сохранить отчёт в JSON-файл student_courses_report.json.
+"""
+
+import json
+from datetime import datetime
+from collections import defaultdict
+
+with open("student_courses.json", "r", encoding="utf-8") as f:
+    students = json.load(f)
+
+caunt_students = len(students)
+caunt_age = 0
+course_counts = defaultdict(int)
+
+for i in students:
+    b_date = datetime.strptime(i["birth_date"], "%d.%m.%Y")
+    e_date = datetime.strptime(i["enrollment_date"], "%d.%m.%Y")
+    age = (e_date - b_date).days / 365.25
+    caunt_age += age
+
+    for course in i["courses"]:
+        course_counts[course] += 1
+average_age = round(caunt_age / caunt_students, 2)
+report = {
+    "total_students": caunt_students,
+    "average_enrollment_age": average_age,
+    "students_per_course": dict(sorted(course_counts.items()))
+}
+print(json.dumps(report, ensure_ascii=False, indent=4))
